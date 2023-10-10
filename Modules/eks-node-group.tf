@@ -6,7 +6,6 @@ resource "aws_iam_role" "eks-node-general" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "eks.amazonaws.com"
           Service = "ec2.amazonaws.com"
         }
     }]
@@ -29,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "amazon-EC2-Container-Registry-ReadOnl
   role       = aws_iam_role.eks-node-general.name
 }
 
-resource "aws_eks_node_group" "node-general" {
+resource "aws_eks_node_group" "eks-node-general" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "nodes-general"
   node_role_arn   = aws_iam_role.eks-node-general.arn
